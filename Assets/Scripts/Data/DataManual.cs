@@ -51,6 +51,29 @@ public class DataManual : MonoBehaviour
             Debug.Log("1がある");
         }
     }
+    private void FindChild(Transform child)
+    {
+        foreach (Transform foundChild in child)
+        {
+            //child is your child transform
+            Debug.Log ("childname:"+foundChild.name);
+            FindChild(foundChild);
+        }
+    }
+
+
+    //親子関係構築
+    private void SetParent(GameObject parent , GameObject child)
+    {
+        child.transform.parent = parent.transform;
+    }
+    private void MoveRotate(Vector3 rotate)
+    {
+        //度数法
+        transform.rotation = Quaternion.Euler(90, 30, 10);
+        //Y軸を軸にして90度回転
+        //transform.Rotate(new Vector3(0f,90f,0f));
+    }
 
     //接触したときのイベント用メソッド 
     void OnTriggerEnter(Collider collider)
