@@ -1,9 +1,6 @@
-﻿using System.Collections;
+﻿using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-using System.IO;
-using UnityEngine.SceneManagement;
 public class Ranking : MonoBehaviour
 {
     public int score;
@@ -17,28 +14,28 @@ public class Ranking : MonoBehaviour
 
     void Start()
     {
-		//DeleteAllData();
+        //DeleteAllData();
         SetRanking(score);
-		GetRanking();
+        GetRanking();
     }
-	//全てのデータを消す
-	private void DeleteAllData()
-	{
-       PlayerPrefs.DeleteAll();
-	}
-	private void GetRanking()
-	{
-		for (int i = 0; i < 10; i++)
+    //全てのデータを消す
+    private void DeleteAllData()
+    {
+        PlayerPrefs.DeleteAll();
+    }
+    private void GetRanking()
+    {
+        for (int i = 0; i < 10; i++)
         {
-            Debug.Log("No:" + rankingNum[i] + "score:" + rankingScore[i]+":ID:" + rankingID[i]);
+            Debug.Log("No:" + rankingNum[i] + "score:" + rankingScore[i] + ":ID:" + rankingID[i]);
         }
-	}
+    }
 
     private void SetRanking(int score)
     {
         int num = 1;
-		int sameRankCounter = 0;
-		int ID;
+        int sameRankCounter = 0;
+        int ID;
         bool isRankSet = false;
 
         if (PlayerPrefs.GetInt("IDNumber") == 0)
@@ -101,7 +98,7 @@ public class Ranking : MonoBehaviour
         while (sameCounter > 0 && number >= 1)
         {
             int rankID = PlayerPrefs.GetInt("Rank" + number + "ID");
-			SetRankID(rankID,(number + 1),ranking);
+            SetRankID(rankID, (number + 1), ranking);
             number--;
             sameCounter--;
         }
@@ -113,7 +110,7 @@ public class Ranking : MonoBehaviour
         int rankScore = PlayerPrefs.GetInt("ID" + rankID + "Score");
         SetDisPlayRanking(rankID, no, no, rankScore);
     }
-    private void SetRankID(int id, int no,int ranking)
+    private void SetRankID(int id, int no, int ranking)
     {
         PlayerPrefs.SetInt("Rank" + no + "ID", id);
         int rankID = PlayerPrefs.GetInt("Rank" + no + "ID");
