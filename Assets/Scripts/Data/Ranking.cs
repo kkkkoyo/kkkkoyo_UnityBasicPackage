@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 public class Ranking : MonoBehaviour
 {
+    [Tooltip("ランキング計算に用いるスコアを入力します")]
     public int score;
+    private int desplayRankingNum = 10;//ランキングを表示する数
     private int ranking = 0;
     private const int MAX_RANKINGNUMBER = 1000;
     private static int[] rankingID = new int[MAX_RANKINGNUMBER];
@@ -18,14 +20,14 @@ public class Ranking : MonoBehaviour
         SetRanking(score);
         GetRanking();
     }
-    //全てのデータを消す
+    //全てのデータを消す(PlayerPrefsを全削除するので注意)
     private void DeleteAllData()
     {
         PlayerPrefs.DeleteAll();
     }
     private void GetRanking()
     {
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < desplayRankingNum; i++)
         {
             Debug.Log("No:" + rankingNum[i] + "score:" + rankingScore[i] + ":ID:" + rankingID[i]);
         }

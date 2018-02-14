@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using kkkkoyo.basic;
 /*
 	kkkkoyo original sample
 */
@@ -10,6 +10,8 @@ public class DataManual : MonoBehaviour
 {
     /*パネルをスライド */
     [SerializeField] private PanelSlider panel;
+    public GameObject game;
+    public DataType pp;
 
     public void PanelSlideIn()
     {
@@ -74,6 +76,31 @@ public class DataManual : MonoBehaviour
         //Y軸を軸にして90度回転
         //transform.Rotate(new Vector3(0f,90f,0f));
     }
+    void Update()
+    {
+        Debug.Log(IsCorrectDataType(game,pp));
+    }
+    /// <summary>
+    /// 指定したGameObjectのdataTypeと指定したdataTypeが正しいかどうかを判定する.
+    /// </summary>
+    /// <returns>正しいかどうか</returns>
+    /// <param name="gameObject">dataTypeを判定したいGameObject</param>
+    /// <param name="type">判定したいDataType</param>
+    private bool IsCorrectDataType(GameObject gameObject,DataType type)
+    {
+        GameDataType componentType = gameObject.GetComponent<GameDataType>();
+        bool isCorrect = false;
+        if (componentType == null)
+        {
+            return false;
+        }
+        if (componentType.dataType == type)
+        {
+            isCorrect = true;
+        }
+        return isCorrect;
+    }
+
 
     //接触したときのイベント用メソッド 
     void OnTriggerEnter(Collider collider)
